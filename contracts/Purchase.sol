@@ -1,12 +1,11 @@
 pragma solidity >=0.4.21 <0.7.5;
-pragma experimental ABIEncoderV2;
 import "./Product.sol";
 
 contract Purchase {
     Product public product;
     address payable public buyer;
 
-    constructor(Product _product) {
+    constructor(Product _product) public {
         product = _product;
         buyer = msg.sender;
     }

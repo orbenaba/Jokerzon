@@ -1,5 +1,4 @@
 pragma solidity >=0.4.21 <0.7.5;
-pragma experimental ABIEncoderV2;
 
 import "./Purchase.sol";
 

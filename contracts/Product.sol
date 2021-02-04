@@ -20,7 +20,7 @@ contract Product {
         string memory _name,
         string memory _description,
         uint256 _price
-    ) {
+    ) public {
         requireAll(_name, _description, _price);
         item = Item(_name, _description, block.timestamp, _price);
         seller = msg.sender;
