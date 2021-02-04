@@ -14,17 +14,18 @@ contract Product {
     }
     Item public item;
 
-    address public owner;
+    address payable public seller;
 
     //Date is given right after the contract has been created
     constructor(
         string memory _name,
         string memory _description,
-        uint256 price
+        uint256 _price,
+        address payable _seller
     ) {
-        requireAll(_name, _description, price);
-        item = Item(_name, _description, block.timestamp, price);
-        owner = msg.sender;
+        requireAll(_name, _description, _price);
+        item = Item(_name, _description, block.timestamp, _price);
+        seller = _seller;
     }
 
     //Saving smell code, all the fields must be validated, so I created a function :-)
