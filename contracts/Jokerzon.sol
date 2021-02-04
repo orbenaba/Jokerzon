@@ -5,16 +5,8 @@ import "./Purchase.sol";
 contract Jokerzon {
     Purchase[] public purchases;
 
-    function addPurchase(
-        address payable _buyer,
-        address payable _seller,
-        string memory _name,
-        string memory _description,
-        uint256 _price
-    ) public {
-        purchases.push(
-            new Purchase(_name, _description, _price, _seller, _buyer)
-        );
+    function addPurchase(Purchase _purchase) public {
+        purchases.push(_purchase);
     }
 
     function readPurchaseContract(uint256 _index)
@@ -24,4 +16,7 @@ contract Jokerzon {
     {
         return Purchase(purchases[_index]).returnData();
     }
+
+    // ToDo: return all the purchases of one customer
+    // ToDo: return all the sales of one seller
 }
