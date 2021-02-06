@@ -6,6 +6,10 @@ import {BrowserRouter as Router,Route} from "react-router-dom";
 
 import "./App.css";
 
+import Home from "./COMPONENTS2/Home";
+
+
+
 import Jokerzon from "./components/Jokerzon/Jokerzon.jsx";
 import Selling from "./components/Selling/Selling";
 import Shopping from "./components/Shopping/Shopping";
@@ -64,7 +68,7 @@ class App extends Component {
       <div>
           <Router>
               <Navbar></Navbar>
-              <Route path="/" exact component={Jokerzon}></Route>
+              <Route path="/" exact component={Home}></Route>
               <Route path="/shopping" component={Shopping}></Route>
               <Route path="/selling" component={Selling}></Route>
           </Router>
