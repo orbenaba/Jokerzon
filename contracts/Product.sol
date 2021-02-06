@@ -1,4 +1,5 @@
 pragma solidity >=0.4.21 <=0.7.4;
+pragma experimental ABIEncoderV2;
 
 /**
     Product contract is created when the seller offers it for sale
@@ -43,5 +44,17 @@ contract Product {
 
     function getSellerAddress() public view returns (address payable) {
         return seller;
+    }
+
+    function getName() public view returns (string memory) {
+        return item.name;
+    }
+
+    function getDescription() public view returns (string memory) {
+        return item.description;
+    }
+
+    function getItem() public view returns (Item memory) {
+        return item;
     }
 }

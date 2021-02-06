@@ -15,7 +15,25 @@ contract Purchase {
         product.getSellerAddress().transfer(product.getPrice());
     }
 
-    function returnData() public view returns (address payable, Product) {
-        return (buyer, product);
+    function returnData()
+        public
+        view
+        returns (
+            bool /*
+            address payable,
+            string memory,
+            string memory,
+            uint256,
+            address payable*/
+        )
+    {
+        return (
+            true
+            /*buyer,
+            product.getName(),
+            product.getDescription(),
+            product.getPrice(),
+            product.getSellerAddress()*/
+        );
     }
 }
