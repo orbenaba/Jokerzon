@@ -1,6 +1,6 @@
 import React from 'react';
 import { homeObjOne, homeObjTwo, homeObjThree/*, homeObjFour*/ } from './Data';
-import InfoSection from '../COMPONENTS2/coco/InfoSection';
+import InfoSection from './InfoSection';
 
 export default function Home() {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Button } from '../globalStyles';
+import { Container, Button } from './globalStyles';
 import {
   InfoSec,
   InfoRow,
@@ -27,10 +27,11 @@ export default function InfoSection({
   alt,
   imgStart,
   start,
-  linkToProfile
+  linkToProfile,
+  whatRoute
 }) {
   console.log();
-  var linkToGit = (linkToProfile === true ? <a href="https://github.com/orbenaba"><Button big fontBig primary={primary}>{buttonLabel}</Button></a>:<Link to='/sign-up'><Button big fontBig primary={primary}>{buttonLabel}</Button></Link>)
+  var linkToGit = (linkToProfile === true ? <a href="https://github.com/orbenaba"><Button big fontBig primary={primary}>{buttonLabel}</Button></a>:<Link to={whatRoute}><Button big fontBig primary={primary}>{buttonLabel}</Button></Link>)
   return (
     <>
       <InfoSec lightBg={lightBg}>

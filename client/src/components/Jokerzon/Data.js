@@ -13,7 +13,8 @@ export const homeObjOne = {
     img: require('./images/joker.jpeg'),
     alt: 'Credit Card',
     start: '',
-    linkToProfile: false
+    linkToProfile: false,
+    whatRoute:'/shopping'
   };
 
   export const homeObjTwo = {
@@ -30,8 +31,10 @@ export const homeObjOne = {
     imgStart: '',
     img: require('./images/sell-your-product-online.jpg'),
     alt: 'Vault',
-    start: '',
-    linkToProfile: false
+    imgStart: 'start',
+    start: 'true',
+    linkToProfile: false,
+    whatRoute: '/selling'
   };
   
   export const homeObjThree = {
@@ -46,10 +49,10 @@ export const homeObjOne = {
     description:
       "B.sc graduated at HIT, 18 Y.0, Deals with Blockchain, Reversing and full-stack",
     buttonLabel: 'View in Github',
-    imgStart: 'start',
+    imgStart: '',
     img: require('./images/profile.jpg'),
     alt: 'Vault',
-    start: 'true',
+    start: '',
     linkToProfile: true
   };
 
