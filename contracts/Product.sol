@@ -6,55 +6,82 @@ pragma experimental ABIEncoderV2;
  */
 
 contract Product {
-    struct Item {
-        string name;
-        string description;
-        uint256 publishedDate;
-        uint256 price;
-    }
-    Item public item;
+    string sellerFullName;
+    string productName;
+    string description;
+    uint256 price;
+    string city;
+    string country;
+    uint256 estimatedDays;
 
-    address payable public seller;
+    address payable sellerAddress;
+    bool isSold;
 
-    //Date is given right after the contract has been created
     constructor(
-        string memory _name,
+        string memory _sellerFullName,
+        string memory _productName,
         string memory _description,
-        uint256 _price
+        uint256 _price,
+        string memory _city,
+        string memory _country,
+        uint256 _estimatedDays
     ) public {
-        requireAll(_name, _description, _price);
-        item = Item(_name, _description, block.timestamp, _price);
-        seller = msg.sender;
+        requireAllFields(
+            _sellerFullName,
+            _productName,
+            _description,
+            _price,
+            _city,
+            _country,
+            _estimatedDays
+        );
+        sellerFullName = _sellerFullName;
+        productName = _productName;
+        description = _description;
+        price = _price;
+        city = _city;
+        country = _country;
+        estimatedDays = _estimatedDays;
+        sellerAddress = msg.sender;
+        isSold = false;
     }
 
-    //Saving smell code, all the fields must be validated, so I created a function :-)
-    function requireAll(
-        string memory _name,
+    function requireAllFields(
+        string memory _sellerFullName,
+        string memory _productName,
         string memory _description,
-        uint256 price
+        uint256 _price,
+        string memory _city,
+        string memory _country,
+        uint256 _estimatedDays
     ) public pure {
-        require(bytes(_name).length != 0);
-        require(bytes(_description).length != 0);
-        require(price > 0);
+        uint256 sellerFullNameLength = bytes(_sellerFullName).length;
+        uint256 productNameLength = bytes(_productName).length;
+        uint256 descriptionLength = bytes(_description).length;
+        uint256 cityLength = bytes(_city).length;
+        uint256 countryLength = bytes(_country).length;
+        require(sellerFullNameLength >= 4 && sellerFullNameLength <= 20);
+        require(productNameLength >= 3 && productNameLength <= 40);
+        require(descriptionLength >= 5 && descriptionLength <= 1000);
+        require(cityLength > 0);
+        require(countryLength > 0);
+        require(_price > 0 && _price < 1000000);
+        require(_estimatedDays >= 1 && _estimatedDays <= 60);
     }
 
-    function getPrice() public view returns (uint256) {
-        return item.price;
+    function setIsSold() public {
+        isSold = !isSold;
     }
 
-    function getSellerAddress() public view returns (address payable) {
-        return seller;
+    function getPrice() public returns (uint256) {
+        return price;
     }
 
-    function getName() public view returns (string memory) {
-        return item.name;
+    function getSellerAddress() public returns (address payable) {
+        return sellerAddress;
     }
 
-    function getDescription() public view returns (string memory) {
-        return item.description;
-    }
-
-    function getItem() public view returns (Item memory) {
-        return item;
+    function getIsSold() public returns (bool) {
+        return isSold;
     }
 }

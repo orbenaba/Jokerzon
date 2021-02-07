@@ -181,6 +181,7 @@ export default function Checkout() {
                 <Typography variant="subtitle1">
                     Your product has been successfully published, Your Wallet will be paid as soon as someone will be interested in the item.
                 </Typography>
+                {/**Here, we need to create the contract */}
               </React.Fragment>
             ) : (
               <React.Fragment>
