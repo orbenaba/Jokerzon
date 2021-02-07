@@ -31,7 +31,7 @@ export default function InfoSection({
   whatRoute
 }) {
   console.log();
-  var linkToGit = (linkToProfile === true ? <a href="https://github.com/orbenaba"><Button big fontBig primary={primary}>{buttonLabel}</Button></a>:<Link to={whatRoute}><Button big fontBig primary={primary}>{buttonLabel}</Button></Link>)
+  var linkToGit = (linkToProfile === true ? <a href="https://github.com/orbenaba" target="_blank"><Button big fontBig primary={primary}>{buttonLabel}</Button></a>:<Link to={whatRoute}><Button big fontBig primary={primary}>{buttonLabel}</Button></Link>)
   return (
     <>
       <InfoSec lightBg={lightBg}>

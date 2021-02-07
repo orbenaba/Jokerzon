@@ -7,7 +7,7 @@ export const homeObjOne = {
     topLine: 'Distributed Online - Shopping',
     headline: 'Jokerzon',
     description:
-      'Our goal is to enable EVERYONE in the world to sell ANYTHING to EVERYONE in the other side of the world with no regulators.',
+      'Our goal is to enable EVERYONE in the world to sell ANYTHING to EVERYONE in the other side of the world with NO REGULATORS.',
     buttonLabel: 'Start shopping',
     imgStart: '',
     img: require('./images/joker.jpeg'),
@@ -45,7 +45,7 @@ export const homeObjOne = {
     lightTextDesc: true,
     topLine: 'Or Ben - Aba',
     headline:
-      "A DApper Lover",
+      "About the creator",
     description:
       "B.sc graduated at HIT, 18 Y.0, Deals with Blockchain, Reversing and full-stack",
     buttonLabel: 'View in Github',

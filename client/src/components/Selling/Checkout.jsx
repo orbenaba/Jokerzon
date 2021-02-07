@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -62,10 +62,12 @@ const useStyles = makeStyles((theme) => ({
 
 const steps = ['Fill details', 'Review your product'];
 
-function getStepContent(step) {
+function getStepContent(step, onFullNameChange, onProductNameChange, onDescriptionChange, onPriceChange, onCityChange, onCountryChange, onEstimatedDaysChange) {
   switch (step) {
     case 0:
-      return <AddressForm />;
+      return <AddressForm onFullNameChange={onFullNameChange} onProductNameChange={onProductNameChange} 
+            onDescriptionChange={onDescriptionChange} onPriceChange={onPriceChange} onCityChange={onCityChange} 
+            onCountryChange={onCountryChange} onEstimatedDaysChange={onEstimatedDaysChange}/>;
     case 1:
       return <Review />;
     default:
@@ -74,11 +76,75 @@ function getStepContent(step) {
 }
 
 export default function Checkout() {
+  const [fullName, setFullName] = useState("");
+  const [productName, setProductName] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState(0);
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
+  const [estimatedDays, setEstimatedDays] = useState(0);
+  const onFullNameChange = (fullName) =>{
+    setFullName(fullName);
+  }
+  
+  const onProductNameChange = (productName) =>{
+    setProductName(productName);
+  }
+  
+  const onDescriptionChange = (description) =>{
+    setDescription(description);
+  }
+  
+  const onPriceChange = (price)=>{
+    setPrice(price);
+  }
+  
+  const onCityChange = (city) =>{
+    console.log(city);
+    setCity(city);
+  }
+  
+  const onCountryChange = (country)=>{
+    setCountry(country);
+  }
+  
+  const onEstimatedDaysChange = (estimatedDays)=>{
+    setEstimatedDays(estimatedDays);
+  }
+  
+  function validateAllTheFields(){
+      if(fullName.length < 4 || fullName.length > 20){
+          return "Full name must be in length [4, 20]";
+      }
+      if(productName.length < 3 || productName.length > 40){
+        return "Product name must be in length [3, 40]";
+      }
+      let descriptionLength = description.split(' ').length;
+      if(descriptionLength < 5 || descriptionLength > 100){
+        return "Description must contain at least 5 words and at most 100 words";
+      }
+      if(price <= 0 || price >= 1000000){
+        return "Price must be positive and at the most 1,000,000";
+      }
+      if(city === "" || country === ""){
+        return "All the fields are required";
+      }
+      if(estimatedDays < 1 || estimatedDays > 60){
+        return "Estimated Days must be in range [1, 60]";
+      }
+      return true;
+  }
+
+
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => {
-    setActiveStep(activeStep + 1);
+    let res = validateAllTheFields();
+    if(res === true)
+        setActiveStep(activeStep + 1);
+    else
+      alert(res);
   };
 
   const handleBack = () => {
@@ -88,9 +154,9 @@ export default function Checkout() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <AppBar position="absolute" color="default" className={classes.appBar}>
+      <AppBar position="center" color="default" className={classes.appBar}>
         <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap>
+          <Typography variant="h6" color="inherit" noWrap style={{marginLeft:'51rem'}}>
             Jokerzon
           </Typography>
         </Toolbar>
@@ -98,7 +164,7 @@ export default function Checkout() {
       <main className={classes.layout}>
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h4" align="center">
-            Checkout
+            Contract - Selling
           </Typography>
           <Stepper activeStep={activeStep} className={classes.stepper}>
             {steps.map((label) => (
@@ -111,16 +177,15 @@ export default function Checkout() {
             {activeStep === steps.length ? (
               <React.Fragment>
                 <Typography variant="h5" gutterBottom>
-                  Thank you for your order.
+                  Thank you for collaborating with Jokerzon.
                 </Typography>
                 <Typography variant="subtitle1">
-                  Your order number is #2001539. We have emailed your order confirmation, and will
-                  send you an update when your order has shipped.
+                    Your product has been successfully published, Your Wallet will be paid as soon as someone will be interested in the item.
                 </Typography>
               </React.Fragment>
             ) : (
               <React.Fragment>
-                {getStepContent(activeStep)}
+                {getStepContent(activeStep, onFullNameChange, onProductNameChange, onDescriptionChange, onPriceChange, onCityChange, onCountryChange, onEstimatedDaysChange)}
                 <div className={classes.buttons}>
                   {activeStep !== 0 && (
                     <Button onClick={handleBack} className={classes.button}>
@@ -133,7 +198,7 @@ export default function Checkout() {
                     onClick={handleNext}
                     className={classes.button}
                   >
-                    {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
+                    {activeStep === steps.length - 1 ? 'Publish' : 'Next'}
                   </Button>
                 </div>
               </React.Fragment>

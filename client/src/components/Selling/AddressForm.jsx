@@ -7,31 +7,22 @@ import DatePicker from "./DatePicker";
 
 
 
-export default function AddressForm() {
+export default function AddressForm(attributesFunctions) {
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
-        Shipping address
+        Seller details
       </Typography>
       <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12}>
           <TextField
             required
-            id="firstName"
-            name="firstName"
-            label="First name"
+            id="sellerName"
+            name="sellerName"
+            label="Your Full name"
             fullWidth
             autoComplete="given-name"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="lastName"
-            name="lastName"
-            label="Last name"
-            fullWidth
-            autoComplete="family-name"
+            onChange={e => attributesFunctions.onFullNameChange(e.target.value)}
           />
         </Grid>
         <Grid item xs={12}>
@@ -41,6 +32,7 @@ export default function AddressForm() {
             name="productName"
             label="Product Name"
             fullWidth
+            onChange={e => attributesFunctions.onProductNameChange(e.target.value)}
           />
         </Grid>
         <Grid item xs={12}>
@@ -50,6 +42,7 @@ export default function AddressForm() {
             name="description"
             label="Description"
             fullWidth
+            onChange={e => attributesFunctions.onDescriptionChange(e.target.value)}
           />
         </Grid>
 
@@ -65,6 +58,7 @@ export default function AddressForm() {
                 max:100000000,min:0.01
               }
             }}
+            onChange={e => attributesFunctions.onPriceChange(e.target.value)}
             fullWidth
           />
         </Grid>
@@ -76,6 +70,7 @@ export default function AddressForm() {
             name="city"
             label="City"
             fullWidth
+            onChange={e => attributesFunctions.onCityChange(e.target.value)}
             autoComplete="shipping address-level2"
           />
         </Grid>
@@ -88,11 +83,29 @@ export default function AddressForm() {
             label="Shipping Country"
             fullWidth
             autoComplete="shipping country"
+            onChange={e => attributesFunctions.onCountryChange(e.target.value)}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
+        <TextField
+          required
+          type="number"
+          InputProps={{
+            inputProps:{
+              max:60,min:1
+            }
+          }}
+          id="estimatedDays"
+          name="estimatedDays"
+          label="Estimated Days"
+          fullWidth
+          onChange={e => attributesFunctions.onEstimatedDaysChange(e.target.value)}
+        />
+      </Grid>
+        {/*
+        <Grid item xs={12} sm={6}>
           {DatePicker()}
-        </Grid>
+          </Grid>*/}
       </Grid>
     </React.Fragment>
   );
