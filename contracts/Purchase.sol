@@ -2,17 +2,17 @@ pragma solidity >=0.4.21 <0.7.5;
 import "./Product.sol";
 
 contract Purchase {
-    Product product;
-    address payable buyer;
-    string buyerFullName;
-    uint256 purchaseDate;
+    Product public product;
+    address payable public buyer;
+    string public buyerFullName;
+    uint256 public purchaseDate;
 
     constructor(Product _product, string memory _buyerFullName) public {
         //Checking if the item was already sold
-        require(_product.getIsSold() == false, "Product already sold");
+        require(_product.isSold() == false, "Product already sold");
         //Checking if the buyer has enough money to commit for the TX
         require(
-            msg.sender.balance >= _product.getPrice(),
+            msg.sender.balance >= _product.price(),
             "You've not enough money bruhhh :("
         );
         product = _product;
@@ -22,6 +22,6 @@ contract Purchase {
 
         //The product sold for the buyer, then transfer money [Seller] -> [Buyer]
         product.setIsSold();
-        product.getSellerAddress().transfer(product.getPrice());
+        product.sellerAddress().transfer(product.price());
     }
 }

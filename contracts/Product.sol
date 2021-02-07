@@ -6,16 +6,16 @@ pragma experimental ABIEncoderV2;
  */
 
 contract Product {
-    string sellerFullName;
-    string productName;
-    string description;
-    uint256 price;
-    string city;
-    string country;
-    uint256 estimatedDays;
+    string public sellerFullName;
+    string public productName;
+    string public description;
+    uint256 public price;
+    string public city;
+    string public country;
+    uint256 public estimatedDays;
 
-    address payable sellerAddress;
-    bool isSold;
+    address payable public sellerAddress;
+    bool public isSold;
 
     constructor(
         string memory _sellerFullName,
@@ -71,17 +71,5 @@ contract Product {
 
     function setIsSold() public {
         isSold = !isSold;
-    }
-
-    function getPrice() public returns (uint256) {
-        return price;
-    }
-
-    function getSellerAddress() public returns (address payable) {
-        return sellerAddress;
-    }
-
-    function getIsSold() public returns (bool) {
-        return isSold;
     }
 }
