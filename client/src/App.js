@@ -12,7 +12,6 @@ import Checkout from "./components/Selling/Checkout";
 
 
 import Jokerzon from "./components/Jokerzon/Home";
-import Selling from "./components/Selling/Selling";
 import Shopping from "./components/Shopping/Shopping";
 import Navbar from "./components/Navbar/Navbar.jsx";
 
