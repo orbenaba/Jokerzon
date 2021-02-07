@@ -7,6 +7,10 @@ import {BrowserRouter as Router,Route} from "react-router-dom";
 import "./App.css";
 
 
+import Checkout from "./components/Selling/Checkout";
+
+
+
 import Jokerzon from "./components/Jokerzon/Home";
 import Selling from "./components/Selling/Selling";
 import Shopping from "./components/Shopping/Shopping";
@@ -67,7 +71,7 @@ class App extends Component {
               <Navbar></Navbar>
               <Route path="/" exact component={Jokerzon}></Route>
               <Route path="/shopping" component={Shopping}></Route>
-              <Route path="/selling" component={Selling}></Route>
+              <Route path="/selling" component={Checkout}></Route>
           </Router>
       </div>
     );
