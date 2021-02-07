@@ -7,7 +7,8 @@ import DatePicker from "./DatePicker";
 
 
 
-export default function AddressForm(attributesFunctions) {
+export default function AddressForm(attributes) {
+  console.log("attributes = ",attributes.fullName);
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
@@ -16,49 +17,53 @@ export default function AddressForm(attributesFunctions) {
       <Grid container spacing={3}>
         <Grid item xs={12}>
           <TextField
+            value={attributes.fullName}
             required
             id="sellerName"
-            name="sellerName"
+            name={attributes.fullName}
             label="Your Full name"
             fullWidth
             autoComplete="given-name"
-            onChange={e => attributesFunctions.onFullNameChange(e.target.value)}
+            onChange={e => attributes.onFullNameChange(e.target.value)}
           />
         </Grid>
         <Grid item xs={12}>
           <TextField
             required
+            value={attributes.productName}
             id="ProductName"
-            name="productName"
+            name={attributes.productName}
             label="Product Name"
             fullWidth
-            onChange={e => attributesFunctions.onProductNameChange(e.target.value)}
+            onChange={e => attributes.onProductNameChange(e.target.value)}
           />
         </Grid>
         <Grid item xs={12}>
           <TextField
             required
+            value={attributes.description}
             id="description"
-            name="description"
+            name={attributes.description}
             label="Description"
             fullWidth
-            onChange={e => attributesFunctions.onDescriptionChange(e.target.value)}
+            onChange={e => attributes.onDescriptionChange(e.target.value)}
           />
         </Grid>
 
         <Grid item xs={12} sm={6}>
           <TextField
             type="number"
+            value={attributes.price}
             required
             id="price"
-            name="price"
+            name={attributes.price}
             label="price"
             InputProps={{
               inputProps:{
                 max:100000000,min:0.01
               }
             }}
-            onChange={e => attributesFunctions.onPriceChange(e.target.value)}
+            onChange={e => attributes.onPriceChange(e.target.value)}
             fullWidth
           />
         </Grid>
@@ -66,11 +71,12 @@ export default function AddressForm(attributesFunctions) {
         <Grid item xs={12} sm={6}>
           <TextField
             required
+            value={attributes.city}
             id="city"
-            name="city"
+            name={attributes.city}
             label="City"
             fullWidth
-            onChange={e => attributesFunctions.onCityChange(e.target.value)}
+            onChange={e => attributes.onCityChange(e.target.value)}
             autoComplete="shipping address-level2"
           />
         </Grid>
@@ -79,11 +85,12 @@ export default function AddressForm(attributesFunctions) {
           <TextField
             required
             id="shipping-country"
-            name="shipping-country"
+            name={attributes.country}
+            value={attributes.country}
             label="Shipping Country"
             fullWidth
             autoComplete="shipping country"
-            onChange={e => attributesFunctions.onCountryChange(e.target.value)}
+            onChange={e => attributes.onCountryChange(e.target.value)}
           />
         </Grid>
         <Grid item xs={12} sm={6}>
@@ -96,10 +103,11 @@ export default function AddressForm(attributesFunctions) {
             }
           }}
           id="estimatedDays"
-          name="estimatedDays"
+          value={attributes.estimatedDays}
+          name={attributes.estimatedDays}
           label="Estimated Days"
           fullWidth
-          onChange={e => attributesFunctions.onEstimatedDaysChange(e.target.value)}
+          onChange={e => attributes.onEstimatedDaysChange(e.target.value)}
         />
       </Grid>
         {/*

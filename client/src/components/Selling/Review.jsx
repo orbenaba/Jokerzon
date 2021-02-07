@@ -20,55 +20,54 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Review() {
+export default function Review(attributes) {
   const classes = useStyles();
-
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
         Product summary
       </Typography>
-      <List disablePadding>
-
-
-        <ListItem className={classes.listItem} key={"product name"}>
-            <ListItemText primary="Product Name" />
-            <Typography variant="h6">{"chair"}</Typography>
-        </ListItem>
-
-        <ListItem className={classes.listItem} key={"product description"}>
-            <ListItemText primary="Product Description" />
-            <Typography variant="h6">{"chair is comfortable"}</Typography>
-        </ListItem>
-
-        <ListItem className={classes.listItem}>
-          <ListItemText primary="Total" />
-          <Typography variant="h6" className={classes.total}>
-            $34.06
-          </Typography>
-        </ListItem>
-      </List>
       <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+                    <Typography variant="h6" gutterBottom className={classes.title}>
+                        Product Name
+                    </Typography>
+                <Typography gutterBottom>{attributes.productName}</Typography>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+                    <Typography variant="h6" gutterBottom className={classes.title}>
+                        Description
+                    </Typography>
+                <Typography gutterBottom>{attributes.description}</Typography>
+            </Grid>
+            <Grid item xs={12} sm={6}>
+                    <Typography variant="h6" gutterBottom className={classes.title}>
+                        Price
+                    </Typography>
+                <Typography gutterBottom>{attributes.price}</Typography>
+            </Grid>
+
+
         <Grid item xs={12} sm={6}>
           <Typography variant="h6" gutterBottom className={classes.title}>
             Shipping
           </Typography>
-          <Typography gutterBottom>First name + Last name</Typography>
+          <Typography gutterBottom>{attributes.fullName}</Typography>
         </Grid>
 
 
         <Grid item xs={12} sm={6}>
           <Typography variant="h6" gutterBottom className={classes.title}>
-            Estimated Date
+            Estimated Days
           </Typography>
-          <Typography gutterBottom>10/10/2022</Typography>
+          <Typography gutterBottom>{attributes.estimatedDays}</Typography>
         </Grid>
 
         <Grid item xs={12} sm={6}>
           <Typography variant="h6" gutterBottom className={classes.title}>
             Source Country
           </Typography>
-          <Typography gutterBottom>Israel</Typography>
+          <Typography gutterBottom>{attributes.country}</Typography>
         </Grid>
 
       </Grid>

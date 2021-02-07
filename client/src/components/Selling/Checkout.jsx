@@ -62,14 +62,15 @@ const useStyles = makeStyles((theme) => ({
 
 const steps = ['Fill details', 'Review your product'];
 
-function getStepContent(step, onFullNameChange, onProductNameChange, onDescriptionChange, onPriceChange, onCityChange, onCountryChange, onEstimatedDaysChange) {
+function getStepContent(step, onFullNameChange, onProductNameChange, onDescriptionChange, onPriceChange, onCityChange, onCountryChange, onEstimatedDaysChange, fullName, productName, description, price, city, country, estimatedDays) {
   switch (step) {
     case 0:
       return <AddressForm onFullNameChange={onFullNameChange} onProductNameChange={onProductNameChange} 
             onDescriptionChange={onDescriptionChange} onPriceChange={onPriceChange} onCityChange={onCityChange} 
-            onCountryChange={onCountryChange} onEstimatedDaysChange={onEstimatedDaysChange}/>;
+            onCountryChange={onCountryChange} onEstimatedDaysChange={onEstimatedDaysChange}
+            fullName={fullName} productName={productName} description={description} price={price} city={city} country={country} estimatedDays={estimatedDays}/>;
     case 1:
-      return <Review />;
+      return <Review fullName={fullName} productName={productName} description={description} price={price} city={city} country={country} estimatedDays={estimatedDays}/>;
     default:
       throw new Error('Unknown step');
   }
@@ -100,7 +101,6 @@ export default function Checkout() {
   }
   
   const onCityChange = (city) =>{
-    console.log(city);
     setCity(city);
   }
   
@@ -150,7 +150,6 @@ export default function Checkout() {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
-
   return (
     <React.Fragment>
       <CssBaseline />
@@ -185,7 +184,7 @@ export default function Checkout() {
               </React.Fragment>
             ) : (
               <React.Fragment>
-                {getStepContent(activeStep, onFullNameChange, onProductNameChange, onDescriptionChange, onPriceChange, onCityChange, onCountryChange, onEstimatedDaysChange)}
+                {getStepContent(activeStep, onFullNameChange, onProductNameChange, onDescriptionChange, onPriceChange, onCityChange, onCountryChange, onEstimatedDaysChange, fullName, productName, description, price, city, country, estimatedDays)}
                 <div className={classes.buttons}>
                   {activeStep !== 0 && (
                     <Button onClick={handleBack} className={classes.button}>
