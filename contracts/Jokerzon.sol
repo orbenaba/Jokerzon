@@ -8,7 +8,8 @@ contract Jokerzon {
     Purchase[] public purchases;
     Product[] public products;
 
-    constructor() public {}
+    constructor() public {
+    }
 
     function addProduct(Product _product) public {
         products.push(_product);
