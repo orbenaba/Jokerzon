@@ -1,11 +1,14 @@
 import React from 'react';
 import { homeObjOne, homeObjTwo, homeObjThree/*, homeObjFour*/ } from './Data';
 import InfoSection from './InfoSection';
+import JokerzonAddress from "./JokerzonAddress.js";
+
 
 export default function Home(props) {
+  console.log("props = ",props);
   return (
     <>
-      <h1 style={{color:"white"}}>Jokerzon cotract address = {props.jokerzonContract._address}</h1>
+      <JokerzonAddress address={props.jokerzonContract._address}></JokerzonAddress>
       <InfoSection {...homeObjOne} />
       <InfoSection {...homeObjTwo} />
       <InfoSection {...homeObjThree} />
