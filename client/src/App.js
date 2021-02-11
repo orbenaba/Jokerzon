@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 
 import JokerzonContract from "./contracts/Jokerzon.json";
-import ProductContract from "./contracts/Product.json";
-import PurchaseContract from "./contracts/Purchase.json";
 
 import getWeb3 from "./getWeb3";
 import {BrowserRouter as Router,Route} from "react-router-dom";
@@ -67,14 +65,13 @@ class App extends Component {
     if (!this.state.web3) {
       return <div>Please connect your Meta-Mask Wallet</div>;
     }
-    console.log("this.state.contract = ",this.state.contract);
     return (
       <div>
           <Router>
               <Navbar></Navbar>
-              <Route path="/" render={props => <Jokerzon jokerzonContract={this.state.contract}/>}></Route>
+              <Route exact path="/" component={() => <Jokerzon jokerzonContract={this.state.contract}/>}></Route>
               <Route path="/shopping" component={Shopping}></Route>
-              <Route path="/selling" component={Checkout}></Route>
+              <Route path="/selling" component={() => <Checkout jokerzonContract={this.state.contract}/>}></Route>
           </Router>
       </div>
     );

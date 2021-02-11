@@ -13,6 +13,12 @@ import Typography from '@material-ui/core/Typography';
 import AddressForm from './AddressForm';
 import Review from './Review';
 
+
+import Jokerzon from "../../contracts/Jokerzon.json";
+
+var TruffleContract = require("truffle-contract");
+
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -76,7 +82,7 @@ function getStepContent(step, onFullNameChange, onProductNameChange, onDescripti
   }
 }
 
-export default function Checkout() {
+export default function Checkout(props) {
   const [fullName, setFullName] = useState("");
   const [productName, setProductName] = useState("");
   const [description, setDescription] = useState("");
@@ -84,6 +90,7 @@ export default function Checkout() {
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
   const [estimatedDays, setEstimatedDays] = useState(0);
+  const [jokerzonContract, setJokezonContract] = useState(props.jokerzonContract);
   const onFullNameChange = (fullName) =>{
     setFullName(fullName);
   }
@@ -120,8 +127,8 @@ export default function Checkout() {
         return "Product name must be in length [3, 40]";
       }
       let descriptionLength = description.split(' ').length;
-      if(descriptionLength < 5 || descriptionLength > 100){
-        return "Description must contain at least 5 words and at most 100 words";
+      if(descriptionLength < 2 || descriptionLength > 100){
+        return "Description must contain at least 2 words and at most 100 words";
       }
       if(price <= 0 || price >= 1000000){
         return "Price must be positive and at the most 1,000,000";
@@ -135,14 +142,32 @@ export default function Checkout() {
       return true;
   }
 
-
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
 
-  const handleNext = () => {
+  const handleNext = async() => {
     let res = validateAllTheFields();
-    if(res === true)
-        setActiveStep(activeStep + 1);
+    if(res === true){
+      setActiveStep(activeStep + 1);
+      //When publishing the new Product, we need to add it to the jokerzon contract
+      if(activeStep === 1){
+          let theRealContract = TruffleContract(Jokerzon);
+          console.log("the real contract is: \n",theRealContract,"\n----------------");
+          var pushed = await jokerzonContract.methods.addProduct(fullName,productName, description,price,city,country,estimatedDays);
+          console.log("PRODUCT ADDED SUCCESSFULLY TO JOKERZON CONTRACT");
+          console.log("PUSHED = ",pushed.arguments);
+          console.log("\n---------------\nThe contract is:\n",jokerzonContract,"\n---------------\n");
+          let total = await jokerzonContract.methods.totalProducts();
+          console.log("\n\nTotal products in jokerzon contract: ", total);
+        /*  console.log("1 \n",jokerzonContract.products(1).arguments);
+          console.log("2 \n",jokerzonContract.products(2).arguments);
+          console.log("3 \n",jokerzonContract.products(3).arguments);
+          console.log("4 \n",jokerzonContract.products(4).arguments);
+          console.log("5 \n",jokerzonContract.products(5).arguments);
+          console.log("6 \n",jokerzonContract.products(6).arguments);*/
+
+      }
+    }
     else
       alert(res);
   };
@@ -150,12 +175,13 @@ export default function Checkout() {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
+
   return (
     <React.Fragment>
       <CssBaseline />
       <AppBar position="center" color="default" className={classes.appBar}>
         <Toolbar>
-          <Typography variant="h6" color="inherit" noWrap style={{marginLeft:'51rem'}}>
+          <Typography variant="h6" color="inherit" noWrap style={{marginLeft:'51rem', alignItems:'center'}}>
             Jokerzon
           </Typography>
         </Toolbar>

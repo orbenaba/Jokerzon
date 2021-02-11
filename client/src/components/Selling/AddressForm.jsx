@@ -8,7 +8,6 @@ import TextField from '@material-ui/core/TextField';
 
 
 export default function AddressForm(attributes) {
-  console.log("attributes = ",attributes.fullName);
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>

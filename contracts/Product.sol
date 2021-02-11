@@ -4,7 +4,6 @@ pragma experimental ABIEncoderV2;
 /**
     Product contract is created when the seller offers it for sale
  */
-
 contract Product {
     string public sellerFullName;
     string public productName;
@@ -71,5 +70,21 @@ contract Product {
 
     function setIsSold() public {
         isSold = !isSold;
+    }
+
+    function setCity(string memory _city) public {
+        city = _city;
+    }
+
+    function setCountry(string memory _country) public {
+        country = _country;
+    }
+
+    function setPrice(uint256 _price) public {
+        price = _price;
+    }
+
+    function setEstimatedDays(uint256 _estimatedDays) public {
+        estimatedDays = _estimatedDays;
     }
 }
