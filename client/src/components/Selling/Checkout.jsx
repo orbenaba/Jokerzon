@@ -14,11 +14,6 @@ import AddressForm from './AddressForm';
 import Review from './Review';
 
 
-import Jokerzon from "../../contracts/Jokerzon.json";
-
-var TruffleContract = require("truffle-contract");
-
-
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
@@ -81,6 +76,12 @@ function getStepContent(step, onFullNameChange, onProductNameChange, onDescripti
       throw new Error('Unknown step');
   }
 }
+
+/**
+ * 
+ * @param {The Address of the current meta - mask wallet in the browser} props.myAccount
+ * @param {The Jokerzon DApp contract} props.jokerzonContract 
+ */
 
 export default function Checkout(props) {
   const [fullName, setFullName] = useState("");
@@ -151,21 +152,7 @@ export default function Checkout(props) {
       setActiveStep(activeStep + 1);
       //When publishing the new Product, we need to add it to the jokerzon contract
       if(activeStep === 1){
-          let theRealContract = TruffleContract(Jokerzon);
-          console.log("the real contract is: \n",theRealContract,"\n----------------");
-          var pushed = await jokerzonContract.methods.addProduct(fullName,productName, description,price,city,country,estimatedDays);
-          console.log("PRODUCT ADDED SUCCESSFULLY TO JOKERZON CONTRACT");
-          console.log("PUSHED = ",pushed.arguments);
-          console.log("\n---------------\nThe contract is:\n",jokerzonContract,"\n---------------\n");
-          let total = await jokerzonContract.methods.totalProducts();
-          console.log("\n\nTotal products in jokerzon contract: ", total);
-        /*  console.log("1 \n",jokerzonContract.products(1).arguments);
-          console.log("2 \n",jokerzonContract.products(2).arguments);
-          console.log("3 \n",jokerzonContract.products(3).arguments);
-          console.log("4 \n",jokerzonContract.products(4).arguments);
-          console.log("5 \n",jokerzonContract.products(5).arguments);
-          console.log("6 \n",jokerzonContract.products(6).arguments);*/
-
+          await jokerzonContract.methods.addProduct(fullName,productName, description,price,city,country,estimatedDays).send({from:props.myAccount});
       }
     }
     else
@@ -236,3 +223,5 @@ export default function Checkout(props) {
     </React.Fragment>
   );
 }
+
+

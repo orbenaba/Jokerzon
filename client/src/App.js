@@ -33,11 +33,13 @@ class App extends Component {
       const deployedNetwork = JokerzonContract.networks[networkId];
       const instance = new web3.eth.Contract(
         JokerzonContract.abi,
-        deployedNetwork && deployedNetwork.address,
+        deployedNetwork && deployedNetwork.address
       );
+
+
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, contract: instance }, this.runExample);
+      this.setState({ web3, accounts, contract: instance });
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -47,31 +49,19 @@ class App extends Component {
     }
   };
 
-  runExample = async () => {
-    /*
-    const { accounts, contract } = this.state;
-
-    // Stores a given value, 5 by default.
-    await contract.methods.set(5).send({ from: accounts[0] });
-
-    // Get the value from the contract to prove it worked.
-    const response = await contract.methods.get().call();
-
-    // Update state with the result.
-    this.setState({ storageValue: response });*/
-  };
-
   render() {
     if (!this.state.web3) {
       return <div>Please connect your Meta-Mask Wallet</div>;
     }
+    console.log("this.state.accounts[0] = ",this.state.accounts[0],"\n --- - - --- --- --- --- ---");
+
     return (
       <div>
           <Router>
               <Navbar></Navbar>
               <Route exact path="/" component={() => <Jokerzon jokerzonContract={this.state.contract}/>}></Route>
               <Route path="/shopping" component={Shopping}></Route>
-              <Route path="/selling" component={() => <Checkout jokerzonContract={this.state.contract}/>}></Route>
+              <Route path="/selling" component={() => <Checkout jokerzonContract={this.state.contract} myAccount={this.state.accounts[0]}/>}></Route>
           </Router>
       </div>
     );
