@@ -31,7 +31,7 @@ contract Jokerzon {
         string memory _description,
         uint256 _price,
         string memory _city,
-        string memory _country,
+        string memory _country
         uint256 _estimatedDays
     ) public returns (Product memory) {
         // Validating that all the fields are valid
@@ -50,6 +50,7 @@ contract Jokerzon {
         require(bytes(_country).length > 0);
         require(_price > 0 && _price < 1000000);
         require(_estimatedDays >= 1 && _estimatedDays <= 60);
+        // Creating the new product after being validated
         Product memory newProduct;
         newProduct.sellerFullName = _sellerFullName;
         newProduct.productName = _productName;

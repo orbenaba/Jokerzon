@@ -7,19 +7,18 @@ import {Switch, BrowserRouter as Router,Route} from "react-router-dom";
 
 
 import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 
 import Checkout from "./components/Selling/Checkout";
-
-
-
 import Jokerzon from "./components/Jokerzon/Home";
 import Shopping from "./components/Shopping/Shopping";
 import Navbar from "./components/Navbar/Navbar.jsx";
 import Default from "./components/Default/Default.jsx";
+import Spinner from "./components/Shared/Spinner";
 
 class App extends Component {
-  state = { storageValue: 0, web3: null, accounts: null, contract: null };
+  state = { storageValue: 0, web3: null, accounts: null, contract: null, isLoading: true };
 
   componentDidMount = async () => {
     try {
@@ -39,7 +38,8 @@ class App extends Component {
 
       // Set web3, accounts, and contract to the state, and then proceed with an
       // example of interacting with the contract's methods.
-      this.setState({ web3, accounts, contract: instance });
+      this.setState({ web3, accounts, contract: instance, isLoading: false });
+
     } catch (error) {
       // Catch any errors for any of the above operations.
       alert(
@@ -53,20 +53,25 @@ class App extends Component {
     if (!this.state.web3) {
       return <div>Please connect your Meta-Mask Wallet</div>;
     }
-
-    return (
-      <div>
-          <Router>
-              <Navbar></Navbar>
-              <Switch>
-                  <Route exact path="/" component={() => <Jokerzon jokerzonContract={this.state.contract}/>}></Route>
-                  <Route exact path="/shopping" component={() => <Shopping jokerzonContract={this.state.contract} myAccount={this.state.accounts[0]}/>}></Route>
-                  <Route exact path="/selling" component={() => <Checkout jokerzonContract={this.state.contract} myAccount={this.state.accounts[0]}/>}></Route>
-                  <Route component={Default}></Route>    
-              </Switch>
-          </Router>
-      </div>
-    );
+    if(this.state.isLoading === true){
+      return <Spinner></Spinner>
+    }
+    else{
+      return (
+        <div>
+            <Router>
+                <Navbar></Navbar>
+                <Switch>
+                    <Route exact path="/" component={() => <Jokerzon jokerzonContract={this.state.contract}/>}></Route>
+                    <Route exact path="/shopping" component={() => <Shopping jokerzonContract={this.state.contract} myAccount={this.state.accounts[0]}/>}></Route>
+                    <Route exact path="/selling" component={() => <Checkout jokerzonContract={this.state.contract} myAccount={this.state.accounts[0]}/>}></Route>
+                    <Route component={Default}></Route>    
+                </Switch>
+            </Router>
+        </div>
+      );
+        
+    }
   }
 }
 
