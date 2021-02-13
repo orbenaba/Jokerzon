@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import AddressForm from './AddressForm';
 import Review from './Review';
 import Spinner from "../Shared/Spinner";
-
+import Title from "../Shared/Title";
 
 
 function Copyright() {
@@ -191,9 +191,7 @@ export default function Checkout(props) {
         </AppBar>
         <main className={classes.layout}>
           <Paper className={classes.paper}>
-            <Typography component="h1" variant="h4" align="center">
-              Contract - Selling
-            </Typography>
+            <Title name="contract" title="Selling"></Title>
             <Stepper activeStep={activeStep} className={classes.stepper}>
               {steps.map((label) => (
                 <Step key={label}>

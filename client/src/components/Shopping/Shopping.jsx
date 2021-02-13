@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Spinner from "../Shared/Spinner";
 import Product from "./Product";
 import Title from "../Shared/Title";
+import {filterByAddressAndNotSold} from "../../Helper/filterFunctions";
 /**
  * 
  * @param {The Address of the current meta - mask wallet in the browser} props.myAccount
@@ -14,10 +15,11 @@ import Title from "../Shared/Title";
 export default function Shopping(props) {
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [myAccount, setMyAccount] = useState(props.myAccount);
     useEffect(() => {
         async function fetchData(){
             let allProducts = await props.jokerzonContract.methods.getAllProducts().call();
-            setProducts(allProducts);
+            setProducts(filterByAddressAndNotSold(allProducts, myAccount));
             setIsLoading(false);    
         }
         fetchData();
