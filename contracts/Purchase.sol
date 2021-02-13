@@ -1,6 +1,6 @@
 pragma solidity >=0.4.21 <0.7.5;
-import "./Product.sol";
 
+/*
 contract Purchase {
     Product public product;
     address payable public buyer;
@@ -25,3 +25,4 @@ contract Purchase {
         product.sellerAddress().transfer(product.price());
     }
 }
+*/

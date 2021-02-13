@@ -1,53 +1,71 @@
 pragma solidity >=0.4.21 <0.7.5;
-import "./Purchase.sol";
-import "./Product.sol";
+pragma experimental ABIEncoderV2;
 
 //There is only one Jokerzon cotract
 //contains all the purchases that has been committed
 contract Jokerzon {
-    Purchase[] public purchases;
+    /**
+     * Product section
+     */
+    // The product seller is msg.sender
+    // The product is not yet sold
+    struct Product {
+        string sellerFullName;
+        string productName;
+        string description;
+        uint256 price;
+        string city;
+        string country;
+        uint256 estimatedDays;
+        address payable sellerAddress;
+        bool isSold;
+    }
+
     Product[] public products;
 
     constructor() public {}
 
     function addProduct(
-        string calldata _sellerFullName,
-        string calldata _productName,
-        string calldata _description,
+        string memory _sellerFullName,
+        string memory _productName,
+        string memory _description,
         uint256 _price,
-        string calldata _city,
-        string calldata _country,
+        string memory _city,
+        string memory _country,
         uint256 _estimatedDays
-    ) external returns (Product) {
-        Product p =
-            new Product(
-                _sellerFullName,
-                _productName,
-                _description,
-                _price,
-                "s",
-                "S",
-                1
-            );
-        //Cause of error which points on stack error, we need to decrease the amount of parameters in the called functions
-        p.setCity(_city);
-        p.setCountry(_country);
-        p.setEstimatedDays(_estimatedDays);
-        products.push(p);
-        return p;
-    }
-
-    //Add the purchase receipt to the Purchase list
-    function addPurchase(Purchase _purchase) public {
-        purchases.push(_purchase);
+    ) public returns (Product memory) {
+        // Validating that all the fields are valid
+        require(
+            bytes(_sellerFullName).length >= 4 &&
+                bytes(_sellerFullName).length <= 20
+        );
+        require(
+            bytes(_productName).length >= 3 && bytes(_productName).length <= 40
+        );
+        require(
+            bytes(_description).length >= 5 &&
+                bytes(_description).length <= 1000
+        );
+        require(bytes(_city).length > 0);
+        require(bytes(_country).length > 0);
+        require(_price > 0 && _price < 1000000);
+        require(_estimatedDays >= 1 && _estimatedDays <= 60);
+        Product memory newProduct;
+        newProduct.sellerFullName = _sellerFullName;
+        newProduct.productName = _productName;
+        newProduct.description = _description;
+        newProduct.price = _price;
+        newProduct.city = _city;
+        newProduct.country = _country;
+        newProduct.estimatedDays = _estimatedDays;
+        newProduct.sellerAddress = msg.sender;
+        newProduct.isSold = false;
+        products.push(newProduct);
+        return newProduct;
     }
 
     function totalProducts() public view returns (uint32) {
         return (uint32)(products.length);
-    }
-
-    function totalPurchases() public view returns (uint32) {
-        return (uint32)(purchases.length);
     }
 
     // Returns all the prouducts in the jokerzon contract
@@ -55,6 +73,7 @@ contract Jokerzon {
         return products;
     }
 
-    // ToDo: return all the purchases of one customer
-    // ToDo: return all the sales of one seller
+    /**
+     * Product section
+     */
 }
