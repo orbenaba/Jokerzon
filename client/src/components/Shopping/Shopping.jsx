@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import Spinner from "../Shared/Spinner";
 import Product from "./Product";
-
+import Title from "../Shared/Title";
 /**
  * 
  * @param {The Address of the current meta - mask wallet in the browser} props.myAccount
@@ -30,6 +30,7 @@ export default function Shopping(props) {
             <React.Fragment>
                 <ProductWrapper className="py-5">
                     <div className="container">
+                    <Title name="Browse" title="all the products" />
                         <div className="row">
                             {products.map(prd => {
                                 return <Product prd={prd} />;

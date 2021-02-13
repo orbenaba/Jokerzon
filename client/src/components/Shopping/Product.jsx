@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from "styled-components";
 
+import generateRandomColor from "../../Helper/generateRandomColor";
 /**
  * 
  * @param {The name of the product} props.productName
@@ -24,10 +25,15 @@ export default function Product(props) {
     return (
         <ProductWrapper className="col-9 mx-auto col-md-6 col-lg-3 my-3">
             <div className="card">
+                <div
+                style={{background: generateRandomColor()}}
+                className="img-container p-5"
+                onClick={() => {}}
+                />
                 <div className="card-footer d-flex justify-content-between">
                     <p className="align-self-center mb-0">{productName}</p>
                     <h5 className="text-blue font-italic mb-0">
-                        <span className="mr-1">$</span>
+                        <span className="mr-1">ETH </span>
                         {price}
                     </h5>
                 </div>
@@ -67,19 +73,7 @@ const ProductWrapper = styled.div`
   .img-container:hover .card-img-top {
     transform: scale(1.2);
   }
-  .cart-btn {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    padding: 0.2rem 0.4rem;
-    background: var(--lightBlue);
-    border: none;
-    color: var(--mainWhite);
-    font-size: 1.4rem;
-    border-radius: 0.5rem 0 0 0;
-    transform: translate(100%, 100%);
-    transition: all 1s ease-in-out;
-  }
+
   .img-container:hover .cart-btn {
     transform: translate(0, 0);
   }
