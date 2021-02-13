@@ -16,7 +16,7 @@ import Shopping from "./components/Shopping/Shopping";
 import Navbar from "./components/Navbar/Navbar.jsx";
 import Default from "./components/Default/Default.jsx";
 import Spinner from "./components/Shared/Spinner";
-
+import Details from "./components/Shopping/Details/Details";
 
 class App extends Component {
   state = { storageValue: 0, web3: null, accounts: null, contract: null, isLoading: true };
@@ -66,6 +66,7 @@ class App extends Component {
                     <Route exact path="/" component={() => <Jokerzon jokerzonContract={this.state.contract}/>}></Route>
                     <Route exact path="/shopping" component={() => <Shopping jokerzonContract={this.state.contract} myAccount={this.state.accounts[0]}/>}></Route>
                     <Route exact path="/selling" component={() => <Checkout jokerzonContract={this.state.contract} myAccount={this.state.accounts[0]}/>}></Route>
+                    <Route path='/shopping/details' component={Details}></Route>
                     <Route component={Default}></Route>
                 </Switch>
             </Router>

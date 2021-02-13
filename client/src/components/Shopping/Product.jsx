@@ -33,7 +33,13 @@ export default function Product(props) {
                 className="color-container p-5"
                 onClick={() => {}}
                 >
-                    <Link to="/details">
+                
+                    <Link to={{
+                      pathname:'/shopping/details',
+                      state: {
+                        sellerFullName,productName,description,price,city,country,estimatedDays,sellerAddress,isSold
+                      }
+                    }}>
                         <h1>_________________________________</h1>
                     </Link>
                 </div>
