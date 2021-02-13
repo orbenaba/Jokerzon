@@ -92,6 +92,8 @@ export default function Checkout(props) {
   const [country, setCountry] = useState("");
   const [estimatedDays, setEstimatedDays] = useState(0);
   const [jokerzonContract, setJokezonContract] = useState(props.jokerzonContract);
+
+  
   const onFullNameChange = (fullName) =>{
     setFullName(fullName);
   }
@@ -110,7 +112,7 @@ export default function Checkout(props) {
   
   const onCityChange = (city) =>{
     setCity(city);
-  }
+  }     
   
   const onCountryChange = (country)=>{
     setCountry(country);

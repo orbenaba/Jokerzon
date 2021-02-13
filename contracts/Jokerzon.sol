@@ -50,6 +50,11 @@ contract Jokerzon {
         return (uint32)(purchases.length);
     }
 
+    // Returns all the prouducts in the jokerzon contract
+    function getAllProducts() external view returns (Product[] memory) {
+        return products;
+    }
+
     // ToDo: return all the purchases of one customer
     // ToDo: return all the sales of one seller
 }

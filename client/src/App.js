@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import JokerzonContract from "./contracts/Jokerzon.json";
 
 import getWeb3 from "./getWeb3";
-import {BrowserRouter as Router,Route} from "react-router-dom";
+import {Switch, BrowserRouter as Router,Route} from "react-router-dom";
 
 
 import "./App.css";
@@ -16,7 +16,7 @@ import Checkout from "./components/Selling/Checkout";
 import Jokerzon from "./components/Jokerzon/Home";
 import Shopping from "./components/Shopping/Shopping";
 import Navbar from "./components/Navbar/Navbar.jsx";
-
+import Default from "./components/Default/Default.jsx";
 
 class App extends Component {
   state = { storageValue: 0, web3: null, accounts: null, contract: null };
@@ -53,15 +53,17 @@ class App extends Component {
     if (!this.state.web3) {
       return <div>Please connect your Meta-Mask Wallet</div>;
     }
-    console.log("this.state.accounts[0] = ",this.state.accounts[0],"\n --- - - --- --- --- --- ---");
 
     return (
       <div>
           <Router>
               <Navbar></Navbar>
-              <Route exact path="/" component={() => <Jokerzon jokerzonContract={this.state.contract}/>}></Route>
-              <Route path="/shopping" component={Shopping}></Route>
-              <Route path="/selling" component={() => <Checkout jokerzonContract={this.state.contract} myAccount={this.state.accounts[0]}/>}></Route>
+              <Switch>
+                  <Route exact path="/" component={() => <Jokerzon jokerzonContract={this.state.contract}/>}></Route>
+                  <Route exact path="/shopping" component={() => <Shopping jokerzonContract={this.state.contract} myAccount={this.state.accounts[0]}/>}></Route>
+                  <Route exact path="/selling" component={() => <Checkout jokerzonContract={this.state.contract} myAccount={this.state.accounts[0]}/>}></Route>
+                  <Route component={Default}></Route>    
+              </Switch>
           </Router>
       </div>
     );
