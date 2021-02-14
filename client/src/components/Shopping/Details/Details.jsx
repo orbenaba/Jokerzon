@@ -1,15 +1,13 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
+import {Button} from "@material-ui/core";
 import Default from "../../Default/Default";
 
 export default function Details(props) {
     const prd = props.location.state;
     if(typeof props.location.state !== 'undefined'){
         return (<div className="container py-5">
-        <div className="row">
 
-        </div>
         <div className="row">
             <div className="col-10 mx-auto col-md-6 my-3 text-capitalize">
                 <h1>{prd.productName}</h1>
@@ -40,12 +38,19 @@ export default function Details(props) {
                 </p>
                 <p className="text-muted lead">{prd.estimatedDays}</p>
             </div>
+
+        </div>
+        <div className="row">
+            <Button className="col-10 mx-auto col-md-6 my-3 text-capitalize" variant="contained" color="secondary">
+                    Buy
+            </Button>
         </div>
     </div>
     );
     }
     else{
-        return <Default location={{pathname:"/shopping/details"}}></Default>
+        return <Default location={{pathname:"/shopping/details"}}>1234567890
+        </Default>
     }
 }
 

@@ -31,7 +31,7 @@ contract Jokerzon {
         string memory _description,
         uint256 _price,
         string memory _city,
-        string memory _country
+        string memory _country,
         uint256 _estimatedDays
     ) public returns (Product memory) {
         // Validating that all the fields are valid
