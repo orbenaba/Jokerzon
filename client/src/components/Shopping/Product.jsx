@@ -25,6 +25,7 @@ export default function Product(props) {
     const estimatedDays = props.prd[ESTIMATED_DAYS];
     const sellerAddress = props.prd[SELLER_ADDRESS];
     const isSold = props.prd[IS_SOLD];
+    const addPurchase = props.jokerzonContract.methods.addPurchase;
     return (
         <ProductWrapper className="col-9 mx-auto col-md-6 col-lg-3 my-3">
             <div className="card">
@@ -34,14 +35,14 @@ export default function Product(props) {
                 onClick={() => {}}
                 >
                 
-                    <Link to={{
-                      pathname:'/shopping/details',
-                      state: {
-                        sellerFullName,productName,description,price,city,country,estimatedDays,sellerAddress,isSold
-                      }
-                    }}>
-                        <h1>_________________________________</h1>
-                    </Link>
+                <Link to={{
+                  pathname:'/shopping/details',
+                    state: {
+                      sellerFullName,productName,description,price,city,country,estimatedDays,sellerAddress,isSold
+                    }
+                  }}>
+                  <h1>_________________________________</h1>
+                </Link>
                 </div>
                 <div className="card-footer d-flex justify-content-between">
                 <p className="align-self-center mb-0">{productName}</p>

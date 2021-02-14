@@ -4,6 +4,9 @@ pragma experimental ABIEncoderV2;
 //There is only one Jokerzon cotract
 //contains all the purchases that has been committed
 contract Jokerzon {
+    uint256 count;
+    Product[] public products;
+    Purchase[]public purchases;
     /**
      * Product section
      */
@@ -18,12 +21,14 @@ contract Jokerzon {
         string country;
         uint256 estimatedDays;
         address payable sellerAddress;
+        uint256 productID;
         bool isSold;
     }
 
-    Product[] public products;
 
-    constructor() public {}
+    constructor() public {
+        count = 0;
+    }
 
     function addProduct(
         string memory _sellerFullName,
@@ -61,6 +66,7 @@ contract Jokerzon {
         newProduct.estimatedDays = _estimatedDays;
         newProduct.sellerAddress = msg.sender;
         newProduct.isSold = false;
+        newProduct.productID = count ++;
         products.push(newProduct);
         return newProduct;
     }
@@ -73,8 +79,45 @@ contract Jokerzon {
     function getAllProducts() external view returns (Product[] memory) {
         return products;
     }
-
     /**
      * Product section
      */
+     /**
+     * Purchase section
+      */
+    struct Purchase{
+        Product product;
+        address payable buyer;
+        string buyerFullName;
+        uint256 dateOfPurchase;
+    }
+    function addPurchase(Product memory _product, string memory _buyerFullName) public returns(Purchase memory){
+        // Validating that all the fields are valid
+        require(
+            bytes(_buyerFullName).length >= 4 &&
+                bytes(_buyerFullName).length <= 20
+        );        
+        //Checking if the item was already sold
+        require(_product.isSold == false, "Product already sold");
+        //Checking if the buyer has enough money to commit for the TX
+        require(
+            msg.sender.balance >= _product.price,
+            "You've not enough money bruhhh :("
+        );
+
+        Purchase memory newPurchase;
+        newPurchase.product = _product;
+        newPurchase.buyer = msg.sender;
+        newPurchase.dateOfPurchase = block.timestamp;
+        newPurchase.buyerFullName = _buyerFullName;
+        _product.isSold = true;
+        //The product sold for the buyer, then transfer money [Seller] -> [Buyer]
+        _product.sellerAddress.transfer(_product.price);
+        purchases.push(newPurchase);
+        return newPurchase;
+    }
+
+    function getAllPurchases()external view returns(Purchase[]memory){
+        return purchases;
+    }
 }

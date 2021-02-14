@@ -16,10 +16,12 @@ export default function Shopping(props) {
     const [products, setProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [myAccount, setMyAccount] = useState(props.myAccount);
+    const [jokerzonContract, setJokerzonContract] = useState();
     useEffect(() => {
         async function fetchData(){
             let allProducts = await props.jokerzonContract.methods.getAllProducts().call();
             setProducts(filterByAddressAndNotSold(allProducts, myAccount));
+            setJokerzonContract(props.jokerzonContract);
             setIsLoading(false);    
         }
         fetchData();
@@ -28,6 +30,7 @@ export default function Shopping(props) {
         return <Spinner></Spinner>
     }
     else{
+        console.log("jokerzonContract =", jokerzonContract);
         return(
             <React.Fragment>
                 <ProductWrapper className="py-5">
@@ -35,7 +38,7 @@ export default function Shopping(props) {
                     <Title name="Browse" title="all the products" />
                         <div className="row">
                             {products.map(prd => {
-                                return <Product prd={prd} />;
+                                return <Product prd={prd} jokerzonContract={jokerzonContract}/>;
                             })}
                         </div>
                     </div>

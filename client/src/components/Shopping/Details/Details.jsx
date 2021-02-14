@@ -5,6 +5,13 @@ import Default from "../../Default/Default";
 
 export default function Details(props) {
     const prd = props.location.state;
+    const handleBuyClick = ()=>{
+        console.log("In handle buy click().");
+    }
+    //console.log("product: \n",props.jokerzonContract);
+
+
+
     if(typeof props.location.state !== 'undefined'){
         return (<div className="container py-5">
 
@@ -38,10 +45,9 @@ export default function Details(props) {
                 </p>
                 <p className="text-muted lead">{prd.estimatedDays}</p>
             </div>
-
         </div>
         <div className="row">
-            <Button className="col-10 mx-auto col-md-6 my-3 text-capitalize" variant="contained" color="secondary">
+            <Button className="col-10 mx-auto col-md-6 my-3 text-capitalize" variant="contained" color="secondary" onClick={()=>{handleBuyClick()}}>
                     Buy
             </Button>
         </div>
@@ -49,7 +55,7 @@ export default function Details(props) {
     );
     }
     else{
-        return <Default location={{pathname:"/shopping/details"}}>1234567890
+        return <Default location={{pathname:"/shopping/details"}}>
         </Default>
     }
 }

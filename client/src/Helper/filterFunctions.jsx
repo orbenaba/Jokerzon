@@ -12,7 +12,5 @@ export function filterByAddressAndNotSold(arrayOfProducts, filterAddress){
             filteredArray.push(p);
         }
     }
-    console.log("not filtered array = \n",arrayOfProducts);
-    console.log("filtered array = \n",filteredArray);
     return filteredArray;
 }
