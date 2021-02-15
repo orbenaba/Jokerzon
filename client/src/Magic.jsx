@@ -6,4 +6,5 @@ export const CITY = 4;
 export const COUNTRY = 5;
 export const ESTIMATED_DAYS = 6;
 export const SELLER_ADDRESS = 7;
-export const IS_SOLD = 8;
+export const PRODUCT_ID = 8;
+export const IS_SOLD = 9;

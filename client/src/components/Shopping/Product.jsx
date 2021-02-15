@@ -4,7 +4,7 @@ import {Link} from "react-router-dom";
 
 import generateRandomColor from "../../Helper/generateRandomColor";
 import "../../Magic";
-import { COUNTRY, DESCRIPTION, ESTIMATED_DAYS, IS_SOLD, PRODUCT_NAME, SELLER_ADDRESS, SELLER_FULL_NAME,PRICE,CITY } from '../../Magic';
+import { COUNTRY, DESCRIPTION, ESTIMATED_DAYS, IS_SOLD, PRODUCT_NAME, SELLER_ADDRESS, SELLER_FULL_NAME,PRICE,CITY, PRODUCT_ID } from '../../Magic';
 /**
  * 
  * @param {The name of the product} props.productName
@@ -24,6 +24,7 @@ export default function Product(props) {
     const country = props.prd[COUNTRY];
     const estimatedDays = props.prd[ESTIMATED_DAYS];
     const sellerAddress = props.prd[SELLER_ADDRESS];
+    const productID = props.prd[PRODUCT_ID];
     const isSold = props.prd[IS_SOLD];
     const addPurchase = props.jokerzonContract.methods.addPurchase;
     return (
@@ -36,10 +37,7 @@ export default function Product(props) {
                 >
                 
                 <Link to={{
-                  pathname:'/shopping/details',
-                    state: {
-                      sellerFullName,productName,description,price,city,country,estimatedDays,sellerAddress,isSold
-                    }
+                    pathname:`/shopping/details/${productID}`
                   }}>
                   <h1>_________________________________</h1>
                 </Link>

@@ -6,7 +6,7 @@ pragma experimental ABIEncoderV2;
 contract Jokerzon {
     uint256 count;
     Product[] public products;
-    Purchase[]public purchases;
+    Purchase[] public purchases;
     /**
      * Product section
      */
@@ -24,7 +24,6 @@ contract Jokerzon {
         uint256 productID;
         bool isSold;
     }
-
 
     constructor() public {
         count = 0;
@@ -66,7 +65,7 @@ contract Jokerzon {
         newProduct.estimatedDays = _estimatedDays;
         newProduct.sellerAddress = msg.sender;
         newProduct.isSold = false;
-        newProduct.productID = count ++;
+        newProduct.productID = count++;
         products.push(newProduct);
         return newProduct;
     }
@@ -79,45 +78,116 @@ contract Jokerzon {
     function getAllProducts() external view returns (Product[] memory) {
         return products;
     }
+
     /**
      * Product section
      */
-     /**
+    /**
      * Purchase section
-      */
-    struct Purchase{
-        Product product;
-        address payable buyer;
-        string buyerFullName;
+     */
+    struct Purchase {
+        string sellerFullName;
+        string productName;
+        string description;
+        uint256 price;
+        string city;
+        string country;
+        uint256 estimatedDays;
+        address payable sellerAddress;
+        uint256 productID;
+        address payable buyerAddress;
         uint256 dateOfPurchase;
     }
-    function addPurchase(Product memory _product, string memory _buyerFullName) public returns(Purchase memory){
+
+    function addPurchase(
+        string memory _sellerFullName,
+        string memory _productName,
+        string memory _description,
+        uint256 _price,
+        string memory _city,
+        string memory _country,
+        uint256 _estimatedDays,
+        address payable _sellerAddress,
+        uint256 _productID
+    ) public payable {
+        require(
+            !checkIfSold(_productID),
+            "The product has already been purchased"
+        );
         // Validating that all the fields are valid
         require(
-            bytes(_buyerFullName).length >= 4 &&
-                bytes(_buyerFullName).length <= 20
-        );        
-        //Checking if the item was already sold
-        require(_product.isSold == false, "Product already sold");
+            bytes(_sellerFullName).length >= 4 &&
+                bytes(_sellerFullName).length <= 20,
+            "Seller name must be at least 4 characters and at the most 20"
+        );
+        require(
+            bytes(_productName).length >= 3 && bytes(_productName).length <= 40,
+            "product name must be at least 3 characters and at the most 40"
+        );
+        require(
+            bytes(_description).length >= 5 &&
+                bytes(_description).length <= 1000,
+            "description must be at least 5 characters and at the most 1000"
+        );
+        require(bytes(_city).length > 0, "city must be at least 0 characters");
+        require(
+            bytes(_country).length > 0,
+            "country must be at least 0 characters"
+        );
+        require(
+            _price > 0 && _price < 1000000,
+            "price must be at least 0 and at the most 1000000"
+        );
+        require(
+            _estimatedDays >= 1 && _estimatedDays <= 60,
+            "Estimated daus must be at least 1 and at the most 60"
+        );
         //Checking if the buyer has enough money to commit for the TX
         require(
-            msg.sender.balance >= _product.price,
+            msg.sender.balance >= _price,
             "You've not enough money bruhhh :("
         );
 
-        Purchase memory newPurchase;
-        newPurchase.product = _product;
-        newPurchase.buyer = msg.sender;
-        newPurchase.dateOfPurchase = block.timestamp;
-        newPurchase.buyerFullName = _buyerFullName;
-        _product.isSold = true;
+        Purchase memory newPurchase =
+            Purchase(
+                _sellerFullName,
+                _productName,
+                _description,
+                _price,
+                _city,
+                _country,
+                _estimatedDays,
+                _sellerAddress,
+                _productID,
+                msg.sender,
+                block.timestamp
+            );
+        setSoldById(_productID);
         //The product sold for the buyer, then transfer money [Seller] -> [Buyer]
-        _product.sellerAddress.transfer(_product.price);
         purchases.push(newPurchase);
-        return newPurchase;
     }
 
-    function getAllPurchases()external view returns(Purchase[]memory){
+    function getAllPurchases() external view returns (Purchase[] memory) {
         return purchases;
+    }
+
+    // Returning the product by the id in Jokerzon contract
+    function getProductById(uint256 index)
+        external
+        view
+        returns (Product memory)
+    {
+        require(index >= 0 && index <= products.length - 1);
+        return products[index];
+    }
+
+    function setSoldById(uint256 index) internal {
+        require(index >= 0 && index <= products.length - 1);
+        products[index].isSold = true;
+    }
+
+    function checkIfSold(uint256 index) internal view returns (bool) {
+        require(index >= 0 && index <= products.length - 1);
+        return products[index].isSold;
     }
 }

@@ -30,7 +30,6 @@ export default function Shopping(props) {
         return <Spinner></Spinner>
     }
     else{
-        console.log("jokerzonContract =", jokerzonContract);
         return(
             <React.Fragment>
                 <ProductWrapper className="py-5">
@@ -38,7 +37,7 @@ export default function Shopping(props) {
                     <Title name="Browse" title="all the products" />
                         <div className="row">
                             {products.map(prd => {
-                                return <Product prd={prd} jokerzonContract={jokerzonContract}/>;
+                                return <Product prd={prd} key={prd.productID} jokerzonContract={jokerzonContract}/>;
                             })}
                         </div>
                     </div>

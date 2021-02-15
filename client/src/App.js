@@ -66,7 +66,7 @@ class App extends Component {
                     <Route exact path="/" component={() => <Jokerzon jokerzonContract={this.state.contract}/>}></Route>
                     <Route exact path="/shopping" component={() => <Shopping jokerzonContract={this.state.contract} myAccount={this.state.accounts[0]}/>}></Route>
                     <Route exact path="/selling" component={() => <Checkout jokerzonContract={this.state.contract} myAccount={this.state.accounts[0]}/>}></Route>
-                    <Route path='/shopping/details' component={Details}></Route>
+                    <Route path='/shopping/details/:id' component={() => <Details jokerzonContract={this.state.contract} myAccount={this.state.accounts[0]} web3={this.state.web3}/>}></Route>
                     <Route component={Default}></Route>
                 </Switch>
             </Router>
