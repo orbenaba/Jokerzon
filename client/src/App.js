@@ -59,7 +59,6 @@ class App extends Component {
       return <Spinner></Spinner>
     }
     else{
-      console.log("jokerzon balance = \n",this.state.contract);
       return (
         <div>
             <Router>
@@ -71,7 +70,7 @@ class App extends Component {
                     <Route exact path="/shopping" component={() => <Shopping jokerzonContract={this.state.contract} myAccount={this.state.accounts[0]}/>}></Route>
                     <Route exact path="/selling" component={() => <Checkout jokerzonContract={this.state.contract} myAccount={this.state.accounts[0]}/>}></Route>
                     <Route path='/shopping/details/:id' component={() => <Details jokerzonContract={this.state.contract} myAccount={this.state.accounts[0]} web3={this.state.web3}/>}></Route>
-                    <Route exact path="/my-area" component={() => <MyArea/>}></Route>
+                    <Route exact path="/my-area*" component={() => <MyArea/>}></Route>
                     <Route component={Default}></Route>
                 </Switch>
             </Router>
