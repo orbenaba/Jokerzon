@@ -184,8 +184,8 @@ export default function Checkout(props) {
         <CssBaseline />
         <AppBar position="center" color="default" className={classes.appBar}>
           <Toolbar>
-            <Typography variant="h6" color="inherit" noWrap style={{marginLeft:'51rem', alignItems:'center'}}>
-              Jokerzon
+            <Typography color="inherit" style={{width:'100%', display:'flex', justifyContent:'center', alignItems:'center'}}>
+              <Title name="Jokerzon"/>
             </Typography>
           </Toolbar>
         </AppBar>

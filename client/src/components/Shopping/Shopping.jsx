@@ -22,6 +22,7 @@ export default function Shopping(props) {
             let allProducts = await props.jokerzonContract.methods.getAllProducts().call();
             setProducts(filterByAddressAndNotSold(allProducts, myAccount));
             setJokerzonContract(props.jokerzonContract);
+            console.log("products.length = ",products.length);
             setIsLoading(false);    
         }
         fetchData();
@@ -30,6 +31,9 @@ export default function Shopping(props) {
         return <Spinner></Spinner>
     }
     else{
+        if(products.length === 0){
+            return <Title name="No items" title="Sell by yourself!"/>
+        }
         return(
             <React.Fragment>
                 <ProductWrapper className="py-5">

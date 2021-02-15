@@ -3,7 +3,6 @@ import styled from "styled-components";
 import {Link} from "react-router-dom";
 
 import generateRandomColor from "../../Helper/generateRandomColor";
-import "../../Magic";
 import { COUNTRY, DESCRIPTION, ESTIMATED_DAYS, IS_SOLD, PRODUCT_NAME, SELLER_ADDRESS, SELLER_FULL_NAME,PRICE,CITY, PRODUCT_ID } from '../../Magic';
 /**
  * 

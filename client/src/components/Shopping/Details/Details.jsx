@@ -1,9 +1,6 @@
 import React, { Component, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import {Button} from "@material-ui/core";
 import Default from "../../Default/Default";
-import getWeb3 from "../../../getWeb3";
-import JokerzonContract from "../../../contracts/Jokerzon.json";
 import Title from "../../Shared/Title";
 
 
