@@ -190,4 +190,19 @@ contract Jokerzon {
         require(index >= 0 && index <= products.length - 1);
         return products[index].isSold;
     }
+
+    // Searching through all the products and checking if the given address is the seller address, if so, then returning
+    // the full name, otherwise - empty string returned
+    function getFullName(address _sellerAddress)
+        external
+        view
+        returns (string memory)
+    {
+        for (uint256 i = 0; i < products.length; i++) {
+            if (products[i].sellerAddress == _sellerAddress) {
+                return products[i].sellerFullName;
+            }
+        }
+        return "";
+    }
 }
