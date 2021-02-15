@@ -9,21 +9,36 @@ import Pending from "./Pending/Pending";
 import Spinner from "../Shared/Spinner";
 import Title from "../Shared/Title";
 
+import sumExpendituresAndRevenues from "../../Helper/RecapPurchases";
+import getMyPurchases from "../../Helper/getMyPurchases";
+import getMyNotSoldProducts from "../../Helper/getMyNotSoldProducts";
+
+
 export default function MyArea(props) {
     const [myAccount, setMyAccount] = useState(props.myAccount);
-    const [jokerzonContract, setJokezonContract] = useState(props.jokerzonContract);
-    let [products, setProducts] = useState([]);
+    const [jokerzonContract, setJokerzonContract] = useState(props.jokerzonContract);
     const [isLoading, setIsLoading] = useState(true);
     const [myFullName, setMyFullName] = useState("");
+    const [expenditures, setExpenditures] = useState(0);
+    const [revenues, setRevenues] = useState(0);
+    const [myBoughtPurchases, setMyBoughtPurchases] = useState([]);
+    const [mySoldPurchases, setMySoldPurchases] = useState([]);
+    const [myNotSoldProducts, setMyNotSoldProducts] = useState([]);
 
     useEffect(()=>{
         async function fetchData(){
             let allProducts = await jokerzonContract.methods.getAllProducts().call();
-            await setProducts(allProducts);
-            let fullName = await jokerzonContract.methods.getFullName(myAccount).call();
-            setMyFullName(fullName);
-            console.log("my full name = ",fullName);
-            console.log("allProducts = ",products);
+            let allPurchases = await jokerzonContract.methods.getAllPurchases().call();
+            
+            let myAllPurchases = getMyPurchases(allPurchases, myAccount);
+            setMySoldPurchases(myAllPurchases.mySold);
+            setMyBoughtPurchases(myAllPurchases.myBought);
+            setMyNotSoldProducts(getMyNotSoldProducts(allProducts, myAccount));
+            
+            let recap = sumExpendituresAndRevenues(allPurchases, myAccount);
+            setExpenditures(recap.expenditures);
+            setRevenues(recap.revenues);
+            setMyFullName(await jokerzonContract.methods.getFullName(myAccount).call());
             setIsLoading(false);
         }
         fetchData();
@@ -32,6 +47,13 @@ export default function MyArea(props) {
     if(isLoading){
         return <Spinner></Spinner>
     }
+    console.log("my account = ", myAccount);
+    console.log("my full name = ",myFullName);
+    console.log("expenditures = ",expenditures);
+    console.log("revenues = ", revenues);
+    console.log("my bought purchases = ", myBoughtPurchases);
+    console.log("my sold purchases = ", mySoldPurchases);
+    console.log("my not sold products = ", myNotSoldProducts);
 
     let greeting = myFullName===""? <Title name="Welcome to the" title="private area"></Title>:<Title name="Hello" title={myFullName}></Title>;
 
