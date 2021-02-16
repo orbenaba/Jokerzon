@@ -3,9 +3,7 @@ import React, {useState, useEffect } from 'react';
 
 import {Switch, BrowserRouter as Router,Route} from "react-router-dom";
 
-import Sold from "../Sold/Sold";
-import Bought from "../Bought/Bought";
-import Pending from "../Pending/Pending";
+
 import Spinner from "../../Shared/Spinner";
 import Title from "../../Shared/Title";
 
@@ -14,9 +12,7 @@ import getMyPurchases from "../../../Helper/getMyPurchases";
 import getMyProducts from "../../../Helper/getMyProducts";
 
 
-import Recap from "./Recap";
-
-
+import Recap from "./Recap/Recap";
 
 
 export default function MyArea(props) {
@@ -29,6 +25,8 @@ export default function MyArea(props) {
     const [myBoughtPurchases, setMyBoughtPurchases] = useState([]);
     const [mySoldPurchases, setMySoldPurchases] = useState([]);
     const [myProducts, setMyProducts] = useState([]);
+
+
 
     useEffect(()=>{
         async function fetchData(){
@@ -52,10 +50,6 @@ export default function MyArea(props) {
     if(isLoading){
         return <Spinner></Spinner>
     }
-    console.log("my account = ", myAccount);
-    console.log("my full name = ",myFullName);
-    console.log("expenditures = ",expenditures);
-    console.log("revenues = ", revenues);
     console.log("my bought purchases = ", myBoughtPurchases);
     console.log("my sold purchases = ", mySoldPurchases);
     console.log("my not sold products = ", myProducts);
@@ -65,21 +59,10 @@ export default function MyArea(props) {
     return (
         <React.Fragment>
             {greeting}
-
-            <Router>
-                <Switch>
-                    <Route exact path="/my-area/sold" component={Sold}></Route>
-                    <Route exact path="/my-area/bought" component={Bought}></Route>
-                    <Route exact path="/my-area/pending" component={Pending}></Route>
-                </Switch>
-            </Router>
             <Recap myAccount={myAccount} expenditures={expenditures} revenues={revenues}/>
-
         </React.Fragment>
-
-    )    
+    )
 }
 
-//<Button variant="primary">Go somewhere</Button>
-//<Card.Footer className="text-muted">2 days ago</Card.Footer>
+//
 //<Card.Header>Account overview</Card.Header>

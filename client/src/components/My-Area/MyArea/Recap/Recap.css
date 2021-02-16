@@ -1,0 +1,23 @@
+.btn-flat {
+    background-color: none;
+    color: red;
+}
+
+.btn-customized-size {
+    padding: 1rem 1.5rem;
+    font-size: 1.5rem;
+    color:rgb(102,0,51);
+    font-weight: bolder;
+    width: 50%;
+}
+
+.btn-customized-size:hover {
+    background-color: rgb(102,0,51);
+    color:rgb(224,224,224);
+}
+
+.btn-customized-size:focus,.btn-customized-size:active:focus,.btn-customized-size.active:focus,
+.btn-customized-size.focus,.btn-customized-size:active.focus,.btn-customized-size.active.focus {
+    outline: none !important;
+    box-shadow: none;
+}
