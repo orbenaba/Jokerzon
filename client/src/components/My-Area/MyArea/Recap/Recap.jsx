@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import { Card, Button } from 'react-bootstrap';
-import {Redirect, Link} from "react-router-dom";
+import {Redirect} from "react-router-dom";
 
 import "./Recap.css";
 
@@ -38,9 +38,6 @@ export default function Recap(props) {
                         <Button variant="flat" size="customized-size" onClick={()=>{setRedirectedToBought(true)}}>Bought</Button>
                     </Card.Footer>
                 </Card>
-
-
-
             </div>
         )    
     }

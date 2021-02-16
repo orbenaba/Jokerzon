@@ -59,6 +59,5 @@ export default function MyArea(props) {
             <Recap myAccount={myAccount} expenditures={expenditures} revenues={revenues}/>
             <MyProducts products={myProducts}></MyProducts>
         </React.Fragment>
-
     )
 }

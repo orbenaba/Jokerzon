@@ -11,6 +11,7 @@ import Title from "../../Shared/Title";
 //props.jokerzonContract.methods.getAllProducts().call()
 export default function MyProducts(props) {
     const [products, setProducts] = useState(props.products);
+    
     if(products.length === 0){
         return <Title name="Empty" title="repo"/>
     }
