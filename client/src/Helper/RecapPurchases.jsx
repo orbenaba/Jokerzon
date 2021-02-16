@@ -3,12 +3,12 @@ export default function sumExpendituresAndRevenues(purchases, myAccount){
     for(let p of purchases){
         // If the seller is me
         if(p.sellerAddress === myAccount){
-            revenues += p.price;
+            revenues += Number(p.price);
         }
         else{
             // If the buyer is me
             if(p.buyerAddress === myAccount){
-                expenditures += p.price;
+                expenditures += Number(p.price);
             }
         }
     }

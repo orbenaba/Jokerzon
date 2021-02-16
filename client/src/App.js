@@ -17,7 +17,7 @@ import Navbar from "./components/Navbar/Navbar.jsx";
 import Default from "./components/Default/Default.jsx";
 import Spinner from "./components/Shared/Spinner";
 import Details from "./components/Shopping/Details/Details";
-import MyArea from "./components/My-Area/My-Area";
+import MyArea from "./components/My-Area/MyArea/MyArea";
 
 class App extends Component {
   state = { storageValue: 0, web3: null, accounts: null, contract: null, isLoading: true };
