@@ -36,7 +36,7 @@ export default function Shopping(props) {
         }
         return(
             <React.Fragment>
-                <ProductWrapper className="py-5">
+                <div className="py-5">
                     <div className="container">
                     <Title name="Browse" title="all the products" />
                         <div className="row">
@@ -45,14 +45,8 @@ export default function Shopping(props) {
                             })}
                         </div>
                     </div>
-                </ProductWrapper>
+                </div>
             </React.Fragment>
         )
     }
 }
-
-
-
-
-const ProductWrapper = styled.section``;
-

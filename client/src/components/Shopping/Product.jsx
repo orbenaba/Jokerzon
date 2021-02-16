@@ -25,7 +25,6 @@ export default function Product(props) {
     const sellerAddress = props.prd[SELLER_ADDRESS];
     const productID = props.prd[PRODUCT_ID];
     const isSold = props.prd[IS_SOLD];
-    const addPurchase = props.jokerzonContract.methods.addPurchase;
     return (
         <ProductWrapper className="col-9 mx-auto col-md-6 col-lg-3 my-3">
             <div className="card">
@@ -34,7 +33,6 @@ export default function Product(props) {
                 className="color-container p-5"
                 onClick={() => {}}
                 >
-                
                 <Link to={{
                     pathname:`/shopping/details/${productID}`
                   }}>
@@ -83,12 +81,3 @@ const ProductWrapper = styled.div`
     transform: scale(10);
   }
 `;
-
-
-
-
-
-
-
-
-

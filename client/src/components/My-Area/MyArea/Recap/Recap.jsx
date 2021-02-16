@@ -4,9 +4,6 @@ import {Redirect, Link} from "react-router-dom";
 
 import "./Recap.css";
 
-import Bought from "../../Bought/Bought";
-import Sold from "../../Sold/Sold";
-
 export default function Recap(props) {
     const [redirectedToBought, setRedirectedToBought] = useState(false);
     const [redirectedToSold, setRedirectedToSold] = useState(false);
@@ -16,12 +13,11 @@ export default function Recap(props) {
             setRedirectedToSold(false);
             setRedirectedToBought(false);
         }
-
         fetchData();
     })
 
     if(redirectedToBought === true){ 
-        return <Redirect to="/my-area/bought" component={Bought}/>;
+        return <Redirect to="/my-area/bought"/>;
     }
     if(redirectedToSold === true){
         return (
@@ -42,6 +38,9 @@ export default function Recap(props) {
                         <Button variant="flat" size="customized-size" onClick={()=>{setRedirectedToBought(true)}}>Bought</Button>
                     </Card.Footer>
                 </Card>
+
+
+
             </div>
         )    
     }

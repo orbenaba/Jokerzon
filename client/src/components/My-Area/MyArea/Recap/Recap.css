@@ -18,6 +18,5 @@
 
 .btn-customized-size:focus,.btn-customized-size:active:focus,.btn-customized-size.active:focus,
 .btn-customized-size.focus,.btn-customized-size:active.focus,.btn-customized-size.active.focus {
-    outline: none !important;
-    box-shadow: none;
+    outline: none;
 }

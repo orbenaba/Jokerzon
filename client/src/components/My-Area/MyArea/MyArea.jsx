@@ -1,9 +1,5 @@
 import React, {useState, useEffect } from 'react';
 
-
-import {Switch, BrowserRouter as Router,Route} from "react-router-dom";
-
-
 import Spinner from "../../Shared/Spinner";
 import Title from "../../Shared/Title";
 
@@ -13,6 +9,7 @@ import getMyProducts from "../../../Helper/getMyProducts";
 
 
 import Recap from "./Recap/Recap";
+import MyProducts from "./MyProducts";
 
 
 export default function MyArea(props) {
@@ -52,7 +49,7 @@ export default function MyArea(props) {
     }
     console.log("my bought purchases = ", myBoughtPurchases);
     console.log("my sold purchases = ", mySoldPurchases);
-    console.log("my not sold products = ", myProducts);
+    console.log("my products = ", myProducts);
 
     let greeting = myFullName===""? <Title name="Welcome to the" title="private area"></Title>:<Title name="Hello" title={myFullName}></Title>;
 
@@ -60,9 +57,8 @@ export default function MyArea(props) {
         <React.Fragment>
             {greeting}
             <Recap myAccount={myAccount} expenditures={expenditures} revenues={revenues}/>
+            <MyProducts products={myProducts}></MyProducts>
         </React.Fragment>
+
     )
 }
-
-//
-//<Card.Header>Account overview</Card.Header>
