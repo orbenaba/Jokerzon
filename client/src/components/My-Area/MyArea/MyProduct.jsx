@@ -1,7 +1,7 @@
-import React from 'react'
-import {Link} from "react-router-dom";
+import React, {useState} from 'react'
+import {Redirect} from "react-router-dom";
 import styled from "styled-components";
-import { Card, Button } from 'react-bootstrap';
+import {  Button } from 'react-bootstrap';
 
 import { COUNTRY, DESCRIPTION, ESTIMATED_DAYS, IS_SOLD, PRODUCT_NAME, SELLER_ADDRESS, SELLER_FULL_NAME,PRICE,CITY, PRODUCT_ID } from '../../../Magic';
 
@@ -18,21 +18,21 @@ export default function MyProduct(props) {
     const sellerAddress = props.prd[SELLER_ADDRESS];
     const productID = props.prd[PRODUCT_ID];
     const isSold = props.prd[IS_SOLD];   
+
+    const [isRedirected, setIsRedirected] = useState(false);
+
+    if(isRedirected === true){
+        return <Redirect to={`/shopping/details/${productID}`}/>;
+    }
+
     return (
         <ProductWrapper className="col-9 mx-auto col-md-6 col-lg-3 my-3">
-            <div className="card">
-                <div
-                style={{background: 'rgb(102,0,51)'}}
-                onClick={() => {}}
-                >
-                <Button variant="flat" size="customized-size"></Button>
+            <div className="card" style={{fontFamily:'cursive'}}>
+                <div>
+                    <Button variant="flat" size="customized-size" onClick={()=>{setIsRedirected(true)}}>{productName}</Button>
                 </div>
-                <div className="card-footer d-flex justify-content-between">
-                <p className="align-self-center mb-0">{productName}</p>
-                    <h5 className="text-blue font-italic mb-0">
-                        {price}
-                        <span className="mr-1"> ETH</span>
-                    </h5>
+                <div className="card-footer d-flex justify-content-center">
+                    <h3>{price} eth</h3>
                 </div>
             </div>
         </ProductWrapper>
@@ -57,7 +57,7 @@ const ProductWrapper = styled.div`
             box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
         }
         .card-footer {
-            background: rgb(102,0,51);
+            background-color: rgb(224, 224, 224);
         }
     }
     .color-container {
@@ -76,15 +76,16 @@ const ProductWrapper = styled.div`
 
     .btn-customized-size {
         font-size: 1.5rem;
-        color:rgb(102,0,51);
+        color:rgb(224,224,224);
         font-weight: bolder;
         width: 15.7rem;
+        background-color: rgb(102,0,51);
         height:8rem;
     }
 
     .btn-customized-size:hover {
-        background-color: rgb(102,0,51);
-        color:rgb(224,224,224);
+        background-color: rgb(224, 224, 224);
+        color:rgb(102,0,51);
     }
 
     .btn-customized-size:focus,.btn-customized-size:active:focus,.btn-customized-size.active:focus,
