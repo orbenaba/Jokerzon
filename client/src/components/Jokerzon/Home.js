@@ -7,7 +7,7 @@ import JokerzonAddress from "./JokerzonAddress.js";
 export default function Home(props) {
 ;  return (
     <>
-      <JokerzonAddress address={props.jokerzonContract._address}></JokerzonAddress>
+      <JokerzonAddress address={props.address}></JokerzonAddress>
       <InfoSection {...homeObjOne} />
       <InfoSection {...homeObjTwo} />
       <InfoSection {...homeObjThree} />

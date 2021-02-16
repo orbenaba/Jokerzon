@@ -1,4 +1,4 @@
-export default function getMyProducts(products, myAccount){
+export default function(products, myAccount){
     let myProducts = [];
     for(let p of products){
         if(p.sellerAddress === myAccount){

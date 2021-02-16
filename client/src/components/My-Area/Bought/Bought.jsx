@@ -1,7 +1,10 @@
-import React from 'react'
+import React, {useState} from 'react'
+import Title from "../../Shared/Title";
 
-export default function Bought() {
-    return (
-        <h1>In bought</h1>
+export default function Sold(props) {
+    console.log("props - ",props);
+    return (<div>
+            <Title name="my bought" title="products"></Title>
+        </div>
     )
 }

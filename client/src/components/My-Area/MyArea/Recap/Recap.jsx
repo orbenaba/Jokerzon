@@ -22,7 +22,7 @@ export default function Recap(props) {
     if(redirectedToSold === true){
         return (
             <Redirect to="/my-area/sold"/>
-        )
+        );
     }
     else{
         return (
