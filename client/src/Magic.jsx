@@ -8,3 +8,4 @@ export const ESTIMATED_DAYS = 6;
 export const SELLER_ADDRESS = 7;
 export const PRODUCT_ID = 8;
 export const IS_SOLD = 9;
+export const DATE_OF_PURCHASE = 10;
