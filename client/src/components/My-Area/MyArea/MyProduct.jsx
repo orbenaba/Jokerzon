@@ -4,8 +4,6 @@ import { Button } from 'react-bootstrap';
 
 import { COUNTRY, DESCRIPTION, ESTIMATED_DAYS, IS_SOLD, PRODUCT_NAME, SELLER_ADDRESS, SELLER_FULL_NAME,PRICE,CITY, PRODUCT_ID } from '../../../Magic';
 
-import Review from "./Review/Review";
-
 export default function MyProduct(props) {
     const sellerFullName = props.prd[SELLER_FULL_NAME];
     const productName = props.prd[PRODUCT_NAME];
@@ -18,30 +16,11 @@ export default function MyProduct(props) {
     const productID = props.prd[PRODUCT_ID];
     const isSold = props.prd[IS_SOLD];   
 
-    const [isRedirected, setIsRedirected] = useState(false);
-
-    if(isRedirected === true){
-        return (<div>
-                    <ProductWrapper className="col-9 mx-auto col-md-6 col-lg-3 my-3">
-                    <div className="card" style={{fontFamily:'cursive'}}>
-                        <div>
-                            <Button variant="flat" size="customized-size" onClick={()=>{setIsRedirected(true)}}>{productName}</Button>
-                        </div>
-                        <div className="card-footer d-flex justify-content-center">
-                            <h3>{price} eth</h3>
-                        </div>
-                    </div>
-                    </ProductWrapper>
-                    <Review product={props.prd} setIsRedirected={setIsRedirected}/>
-                </div>);
-
-    }
-
     return (
         <ProductWrapper className="col-9 mx-auto col-md-6 col-lg-3 my-3">
             <div className="card" style={{fontFamily:'cursive'}}>
                 <div>
-                    <Button variant="flat" size="customized-size" onClick={()=>{setIsRedirected(true)}}>{productName}</Button>
+                    <Button variant="flat" size="customized-size" onClick={()=>{props.setReviewedProduct(props.prd)}}>{productName}</Button>
                 </div>
                 <div className="card-footer d-flex justify-content-center">
                     <h3>{price} eth</h3>

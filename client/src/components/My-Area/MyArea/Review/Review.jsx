@@ -20,7 +20,7 @@ export default function Review(props) {
                             <h5>price: {product.price} eth</h5>
                             <h5>Estimated days: {product.estimatedDays}</h5>
                             <h5 className="text-success">Sold? {product.isSold === true?"Yes":"No"}</h5>
-                            <Button variant="danger" size="lg" onClick={()=> {setIsOpened(false);props.setIsRedirected(false)}}>Close</Button>
+                            <Button variant="danger" size="lg" onClick={()=> {setIsOpened(false); props.setReviewedProduct(null);}}>Close</Button>
                         </div>
                     </div>
                 </div>
