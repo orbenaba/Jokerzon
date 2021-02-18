@@ -36,18 +36,22 @@ class App extends Component {
     try {
       // Get network provider and web3 instance.
       const web3 = await getWeb3();
-
+      console.log("1");
       // Use web3 to get the user's accounts.
       const accounts = await web3.eth.getAccounts();
+      console.log("2");
       // Get the contract instance.
-        const networkId = await web3.eth.net.getId();
-        const deployedNetwork = JokerzonContract.networks[networkId];
-        const instance = new web3.eth.Contract(
+      const networkId = await web3.eth.net.getId();
+      console.log(3);
+      const deployedNetwork = JokerzonContract.networks[networkId];
+      console.log(4);
+      const instance = new web3.eth.Contract(
           JokerzonContract.abi,
           deployedNetwork && deployedNetwork.address
       );
-
+      console.log("------------------\n",instance.methods);
       let allProducts = await instance.methods.getAllProducts().call();
+      console.log(6);
       let allPurchases = await instance.methods.getAllPurchases().call();
       let fullName = await instance.methods.getFullName(accounts[0]).call();
       // Set web3, accounts, and contract to the state, and then proceed with an
