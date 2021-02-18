@@ -16,7 +16,6 @@ export default function MyProducts(props) {
     if(products.length === 0){
         return <Title name="Empty" title="repo"/>
     }
-    console.log("reviewProduct = ", reviewedProduct);
 
     let review = reviewedProduct?<Review product={reviewedProduct} setReviewedProduct={setReviewedProduct}></Review>:null;
     return (<div className="py-5">

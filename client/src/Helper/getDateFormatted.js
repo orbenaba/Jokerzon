@@ -1,4 +1,4 @@
 export default function getDateFormatted(date){
-    let localeString = date.toLocaleString();
+    let localeString = (new Date(Number(date))).toLocaleString();
     return localeString.split(',')[0];
 }

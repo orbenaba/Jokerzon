@@ -7,7 +7,6 @@ import {  Button } from 'react-bootstrap';
 export default function Review(props) {
     const [product, setProduct] = useState(props.product);
     const [isOpened, setIsOpened] = useState(true);
-    console.log("props are:\n",props);
     if(isOpened === true){
         return (
             <ProductContainer>

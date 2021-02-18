@@ -49,7 +49,6 @@ class App extends Component {
           JokerzonContract.abi,
           deployedNetwork && deployedNetwork.address
       );
-      console.log("------------------\n",instance.methods);
       let allProducts = await instance.methods.getAllProducts().call();
       console.log(6);
       let allPurchases = await instance.methods.getAllPurchases().call();

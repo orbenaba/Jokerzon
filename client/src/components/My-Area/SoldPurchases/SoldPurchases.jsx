@@ -15,27 +15,25 @@ export default function SoldPurchases(props) {
         let {delivered, arrived} = separateArrivedAndDelivered(props.purchases);
         setDelivered(delivered);
         setArrived(arrived);
-        console.log("arrived - ",arrived);
-        console.log("delivered - ",delivered);
     },[])
     return (<div>
             <Title name="my sold" title="products"></Title>
             <div className="container" style={{alignItems:'center'}}>
-            <div className="row">
-                <span className="dates-title">Delivered</span>
-                <span class="fas fa-arrow-right fa-5x" aria-hidden="true" style={{marginLeft:'33%', color:'rgb(102,0,51)'}}></span>
-                <span class="dates-title" style={{marginLeft:'30%'}}>Estimated</span> 
-            </div>
-                {arrived.map(arr=>{
-                    return (
-                            <Purchase isArrived purchase={arr}></Purchase>
+                <div className="row">
+                    <span className="dates-title">Delivered</span>
+                    <span class="fas fa-arrow-right fa-5x" aria-hidden="true" style={{marginLeft:'33%', color:'rgb(102,0,51)'}}></span>
+                    <span class="dates-title" style={{marginLeft:'30%'}}>Estimated</span> 
+                </div>
+                    {arrived.map(arr=>{
+                        return (
+                                <Purchase isArrived purchase={arr}></Purchase>
+                            )
+                    })}
+                    {delivered.map(del=>{
+                        return (
+                                <Purchase purchase={del}></Purchase>
                         )
-                })}
-                {delivered.map(del=>{
-                    return (
-                            <Purchase purchase={del}></Purchase>
-                    )
-                })}
+                    })}
             </div>
         </div>
     )
