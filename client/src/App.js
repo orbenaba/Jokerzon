@@ -22,7 +22,7 @@ import MyArea from "./components/My-Area/MyArea/MyArea";
 
 
 
-import Bought from "./components/My-Area/Bought/Bought";
+import BoughtPurchases from "./components/My-Area/BoughtPurchases/BoughtPurchases";
 import SoldPurchases from "./components/My-Area/SoldPurchases/SoldPurchases";
 
 import getMyPurchases from "./Helper/getMyPurchases";
@@ -88,7 +88,7 @@ class App extends Component {
                     <Route path='/shopping/details/:id' component={() => <Details jokerzonContract={this.state.contract} myAccount={this.state.accounts[0]} web3={this.state.web3}/>}></Route>
                     
                     <Route exact path="/my-area/sold" component={()=> <SoldPurchases purchases={this.state.myPurchases.mySold}></SoldPurchases>}></Route>
-                    <Route exact path="/my-area/bought" component={()=><Bought purchases={this.state.myPurchases.myBought}></Bought>}></Route>
+                    <Route exact path="/my-area/bought" component={()=><BoughtPurchases purchases={this.state.myPurchases.myBought}></BoughtPurchases>}></Route>
 
                     <Route exact path="/my-area" component={() => <MyArea fullName={this.state.fullName} myPurchases={this.state.myPurchases} myProducts={getMyProducts(this.state.products, this.state.accounts[0])} myAccount={this.state.accounts[0]}/>}></Route>
                     <Route component={Default}></Route>
